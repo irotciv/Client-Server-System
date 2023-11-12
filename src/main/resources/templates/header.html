@@ -1,0 +1,19 @@
+<div xmlns:th="http://www.thymeleaf.org">
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <div class="navbar-brand">Hello
+                    <a class="text-right"
+                       th:if="${#authentication.isAuthenticated()}"
+                       th:href="@{|/users/${#authentication.principal.id}/read|}"
+                       th:text="${#authentication.principal.firstName}"></a>!
+                </div>
+<!--                <a class="navbar-brand" th:href="@{/}">Home</a>-->
+                <a class="navbar-brand"
+                   th:if="${#authorization.expression('hasAuthority(''ADMIN'')')}"
+                   th:href="@{/users/all}">List of Users</a>
+                <a class="navbar-brand" href="/perform-logout">Logout</a>
+            </div>
+        </div>
+    </nav>
+</div>
